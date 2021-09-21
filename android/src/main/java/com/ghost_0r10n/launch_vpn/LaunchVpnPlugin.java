@@ -67,12 +67,10 @@ public class LaunchVpnPlugin extends FlutterFragmentActivity implements MethodCa
   }
 
   private void openApp(String packageName, String activityClass) {
+    Intent launchIntent = new Intent(packageName);
     if(!activityClass.equals("none")){
       
       Intent launchIntent = new Intent(packageName+'.'+activityClass);
-    }else{
-      Intent launchIntent = new Intent(packageName);
-
     }
       //if(launchIntent!=null){
 //
