@@ -26,7 +26,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.example.launchexternalapp
-        pluginClass: LaunchexternalappPlugin
+        package: com.ghost_0r10n.launch_vpn
+        pluginClass: LaunchVpnPlugin
       ios:
         pluginClass: LaunchexternalappPlugin
