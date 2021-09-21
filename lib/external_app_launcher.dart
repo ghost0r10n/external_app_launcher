@@ -12,7 +12,8 @@ class LaunchApp {
   }
 
   static isAppInstalled(
-      {required String iosUrlScheme, required String androidPackageName}) async {
+      {required String iosUrlScheme,
+      required String androidPackageName}) async {
     String packageName = Platform.isIOS ? iosUrlScheme : androidPackageName;
     if (packageName.isEmpty) {
       throw Exception('The package name can not be empty');
@@ -25,6 +26,7 @@ class LaunchApp {
   static Future openApp(
       {required String iosUrlScheme,
       required String androidPackageName,
+      String? activityClass,
       String? appStoreLink,
       bool? openStore}) async {
     String packageName = Platform.isIOS ? iosUrlScheme : androidPackageName;
@@ -39,8 +41,10 @@ class LaunchApp {
 
     return await _channel.invokeMethod('openApp', {
       'package_name': packageName,
+      'activity_class': activityClass,
       'open_store': openStore == false ? "false" : "open it",
       'app_store_link': appStoreLink
+
     });
   }
   // }
