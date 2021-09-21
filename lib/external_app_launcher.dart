@@ -26,7 +26,7 @@ class LaunchApp {
   static Future openApp(
       {required String iosUrlScheme,
       required String androidPackageName,
-      String? activityClass,
+      String activityClass = "none",
       String? appStoreLink,
       bool? openStore}) async {
     String packageName = Platform.isIOS ? iosUrlScheme : androidPackageName;
@@ -44,7 +44,6 @@ class LaunchApp {
       'activity_class': activityClass,
       'open_store': openStore == false ? "false" : "open it",
       'app_store_link': appStoreLink
-
     });
   }
   // }
