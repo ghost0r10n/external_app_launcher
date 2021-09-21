@@ -1,10 +1,12 @@
-package com.geekyants.launch_vpn;
-
+package com.ghost_0r10n.launch_vpn;
+//import Constants;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import io.flutter.plugin.common.PluginRegistry.Registrar;
+import android.net.Uri;
+import io.flutter.app.FlutterActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +14,7 @@ import android.text.TextUtils;
 import android.content.pm.PackageManager;
 
 /** LaunchVpnPlugin */
-public class LaunchVpnPlugin implements MethodCallHandler {
+public class LaunchVpnPlugin extends FlutterActivity implements MethodCallHandler {
 
   private final Context context;
 
@@ -41,7 +43,13 @@ public class LaunchVpnPlugin implements MethodCallHandler {
         result.error("ERROR", "Empty or null package name", null);
       } else {
         String packageName = call.argument("package_name").toString();
-        result.success(openApp(packageName));
+        if(call.hasArgument("activity_class")){
+          String activityClass = call.argument("activity_class").toString();
+          openApp(packageName,activityClass);
+        }else{
+          openApp(packageName,null);
+
+        }
       }
     } else {
       result.notImplemented();
@@ -57,18 +65,25 @@ public class LaunchVpnPlugin implements MethodCallHandler {
     }
   }
 
-  private int openApp(String packageName) {
+  private void openApp(String packageName, String activityClass) {
     Intent launchIntent = context.getPackageManager().getLaunchIntentForPackage(packageName);
-    if (launchIntent != null) {
-      // null pointer check in case package name was not found
-      context.startActivity(launchIntent);
-      return 1;
+    if(activityClass != null){
+      launchIntent.setClassName(packageName, packageName+"."+activityClass);
     }
-     android.util.Log.d("dewfw","vdsvfsvs");
-    Intent intent1 = new Intent(Intent.ACTION_VIEW);
-    intent1.setData(android.net.Uri.parse("https://play.google.com/store/apps/details?id="+packageName));
-    // startActivity(new Intent(Intent.ACTION_VIEW,Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
-    context.startActivity(intent1);
-    return 0;
+    
+      // null pointer check in case package name was not found
+      startActivityForResult(launchIntent,777);
+    
+   
+    
   }
+
+  @Override
+  protected void onActivityResult(int requestCode, int result, Intent data) {
+      super.onActivityResult(requestCode, result, data);
+      
+     
+  
 }
+}
+

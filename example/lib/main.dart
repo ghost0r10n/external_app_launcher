@@ -33,7 +33,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.blue,
                 onPressed: () async {
                   await LaunchApp.openApp(
-                    androidPackageName: 'net.pulsesecure.pulsesecure',
+                    androidPackageName: 'com.dheartcare.dheart',
                     iosUrlScheme: 'pulsesecure://',
                     appStoreLink:
                         'itms-apps://itunes.apple.com/us/app/pulse-secure/id945832041',
