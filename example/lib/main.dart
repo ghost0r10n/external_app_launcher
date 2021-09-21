@@ -34,7 +34,7 @@ class _MyAppState extends State<MyApp> {
                 onPressed: () async {
                   await LaunchApp.openApp(
                     androidPackageName: 'com.dheartcare.dheart',
-                    iosUrlScheme: 'pulsesecure://',
+                    iosUrlScheme: 'pulsesecure://', activityClass: "RECORD_ECG",
                     appStoreLink:
                         'itms-apps://itunes.apple.com/us/app/pulse-secure/id945832041',
                     // openStore: false
